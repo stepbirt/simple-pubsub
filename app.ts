@@ -249,15 +249,15 @@ class Maybe<T> {
   }
 
   isSome(): boolean {
-    return this.value !== null;
+    return this.value !== null && this.value !== undefined;
   }
 
   isNone(): boolean {
-    return this.value === null;
+    return this.value === null || this.value === undefined;
   }
 
   map<U>(fn: (value: T) => U): Maybe<U> {
-    if (this.value === null) {
+    if (this.value === null || this.value === undefined) {
       return Maybe.none<U>();
     }
     return Maybe.some(fn(this.value));
